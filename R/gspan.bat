@@ -1,0 +1,1 @@
+java -Xmx1024m -jar "C:\Users\petelin\Documents\R\win-library\3.3\subgraphMining\parsemis\parsemis-2008-12-01.jar" --graphFile=..\data\gspan\input.g --minimumFrequency=26 --outputFile=..\data\gspan\output.g
