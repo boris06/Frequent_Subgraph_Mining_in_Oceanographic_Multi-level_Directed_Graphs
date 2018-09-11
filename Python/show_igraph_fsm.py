@@ -339,17 +339,17 @@ def show_igraph(fvert,fgmls,n_subgr,outfile,minsup,scale,labels,fontsize):
 
     return                    
 
-fvert='data\\vertices\\mfs_vertices_60x30.tab'
+fvert='..\\data\\vertices\\mfs_vertices_60x30.tab'
 
-files = glob.glob('data\\temp1\\*')
+files = glob.glob('..\\data\\temp1\\*')
 for f in files:
     os.remove(f)
 ## enter desired n_subgr
 n_subgr = 8
-zipfile1 = zipfile.ZipFile("data\\subgraph\\%d-subgraph-adriatic-26.zip" % n_subgr,"r")
-zipfile1.extractall('data\\temp1\\')
-fgmls = glob.glob("data\\temp1\\graph*.gml")
-outfile = "results\\%d-subgraph-adriatic-26.txt" % n_subgr
+zipfile1 = zipfile.ZipFile("..\\data\\subgraphs\\%d-subgraph-adriatic-26.zip" % n_subgr,"r")
+zipfile1.extractall('..\\data\\temp1\\')
+fgmls = glob.glob("..\\data\\temp1\\graph*.gml")
+outfile = "..\\results\\%d-subgraph-adriatic-26.txt" % n_subgr
 print outfile
 
 matplotlib.rcParams.update({'font.size': 24})
