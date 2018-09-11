@@ -1,10 +1,11 @@
 # Frequent Subgraph Mining in Oceanographic Multi-level Directed Graphs
 
-This package contains R and Python scripts and data for generating and visualizing n-subgraphs, n-convergences, n-divergences and n-paths.
+This package contains R and Python scripts and data for generating and visualizing n-subgraphs, n-convergences, n-divergences and n-paths. The package was developed under Windows 10.
 
 ## Prerequisites
 
-What things you need to install the software and how to install them
+* R project - in this project the version 3.3 was used due to the igraph0 library, which is deprecated. In case of inaction, copy the igraph0 library directly under the directory C:\Users\...\Documents\R\win-library\3.3
+* Python (version >= 2.7) with the following libraries: matplolib, shapely, basemap,glob, zipfile and os 
 
 ## Package description
 
