@@ -339,45 +339,22 @@ def show_igraph(fvert,fgmls,n_subgr,outfile,minsup,scale,labels,fontsize):
 
     return                    
 
-## changed
-## before
-## fvert='C:\\Users\\petelin\\Documents\\Doktorat\\Raziskovalno delo\\Porocila\\tretji_letnik\\data\\vertices\\mfs_vertices_60x30.tab'
-## after
 fvert='data\\vertices\\mfs_vertices_60x30.tab'
 
-## changed
-## before
-## files = glob.glob('C:\\Users\\petelin\\Documents\\Doktorat\\Raziskovalno delo\\R\\temp1\\*')
-## after
 files = glob.glob('data\\temp1\\*')
 for f in files:
     os.remove(f)
 ## enter desired n_subgr
 n_subgr = 8
-## changed
-## before
-## zipfile1 = zipfile.ZipFile("C:\\Users\\petelin\\Documents\\Doktorat\\Raziskovalno delo\\R\\%d-subgraph-adriatic-26.zip" % n_subgr,"r")
-## zipfile1.extractall('C:\\Users\\petelin\\Documents\\Doktorat\\Raziskovalno delo\\R\\temp1\\')
-## after
 zipfile1 = zipfile.ZipFile("data\\subgraph\\%d-subgraph-adriatic-26.zip" % n_subgr,"r")
 zipfile1.extractall('data\\temp1\\')
-#fgmls = glob.glob("C:\\Users\\petelin\\Documents\\Doktorat\\Raziskovalno delo\\R\\temp1\\graph*.gml" % n_subgr)
-## changed
-## before
-## fgmls = glob.glob("data\\temp1\\graph*.gml")
-## after
 fgmls = glob.glob("data\\temp1\\graph*.gml")
-## changed
-## before
-## outfile = "C:\\Users\\petelin\\Documents\\Doktorat\\Raziskovalno delo\\R\\%d-subgraph-adriatic-26.txt" % n_subgr
-## after
 outfile = "results\\%d-subgraph-adriatic-26.txt" % n_subgr
 print outfile
 
 matplotlib.rcParams.update({'font.size': 24})
 
 ## enter desired minsup
-##minsup = 52
 minsup = 26
 
 show_igraph(fvert,fgmls,n_subgr,outfile,minsup,3000,1,12)
