@@ -10,13 +10,18 @@ What things you need to install the software and how to install them
 
 ### Scripts
 
-#### R
+#### R (subdirectory "R")
 
-#### Python
+* prepare_gspan_input.R - generates the file "input.g" which contains the input data for the gSpan algorithm. The input is based on multi-level directed graphs (subdirectory data/multilevel_graphs) and the selected discretization of edges weights in the mentioned graphs.
+* 
 
-### Datasets
+#### Python  R (subdirectory "R")
 
-#### multi-level directed Graphs
+### Datasets (subdirectory "data")
+
+#### multilevel_graphs
+
+This subdirectory contains multi-level directed graphs, which are the result of the methodology described in https://www.sciencedirect.com/science/article/pii/S0957417413001541.
 
 #### gspan
 
