@@ -15,8 +15,11 @@ This package contains R and Python scripts and data for generating and visualizi
 
 * prepare_gspan_input.R - generates the file "input.g" which contains the input data for the gSpan algorithm. The input is based on multi-level directed graphs (subdirectory data/multilevel_graphs) and the selected discretization of edges weights in the mentioned graphs.
 * the batch files gspan.bat, gspan_divg_convg.bat and gspan_path.bat, respectivelly,  are used to generate gSpan output files for n-subgraphs, n-divergences, n-convergences and n-paths (files output.g, output_divg_convg.g and output_paths.g).
+* process_gspan_output.R, process_gspan_output_divg_convg.R and process_gspan_output_paths.R produce subgraphs as .gml files in subdirectory data/subgraphs for n-subgraphs, n-divergences, n-convergences and n-paths.
 
-#### Python  R (subdirectory "R")
+#### Python (subdirectory "Python")
+
+* show_igraph_fsm.py, show_igraph_fsm_divg_convg.py, show_igraph_fsm_paths.py are used for the visualization of .gml files for n-subgraphs, n-divergences, n-convergences and n-paths.
 
 ### Datasets (subdirectory "data")
 
@@ -26,7 +29,11 @@ This subdirectory contains multi-level directed graphs, which are the result of 
 
 #### gspan
 
+* gSpan input and output files
+
 #### subgraphs
+
+* 
 
 #### vertices
 
