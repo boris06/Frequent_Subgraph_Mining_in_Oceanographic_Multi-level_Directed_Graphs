@@ -4,7 +4,7 @@ This package contains R and Python scripts and data for generating and visualizi
 
 ## Prerequisites
 
-* R project - in this project the version 3.3 was used due to the igraph0 library, which is deprecated. In case of problems, copy the subdirectory R/igraph0 library directly under the directory C:\Users\...\Documents\R\win-library\3.3
+* R project - in this project the version 3.3 was used due to the igraph0 library, which is deprecated. In case of problems, copy the subdirectory R/igraph0 library directly under the directory C:\Users\...\Documents\R\win-library\3.3. The package FrequentSubgraphMining (https://www.csc2.ncsu.edu/faculty/nfsamato/practical-graph-mining-with-R/R-code/FrequentSubgraphMining.zip) is also needed.
 * Python (version >= 2.7) with the following libraries: matplolib, shapely, basemap,glob, zipfile and os 
 
 ## Package description
@@ -33,7 +33,18 @@ This subdirectory contains multi-level directed graphs, which are the result of 
 
 #### subgraphs
 
-* 
+* n-subgraphs, n-divergences, n-convergences and n-paths in the form of .gml files, produced by R scripts above 
 
 #### vertices
+
+* the geometric properties of the graphs, needed for drawing
+
+### Running the scripts
+
+The following diagram shows the sequence of running the scripts:
+
+![Process diagram]
+
+[Process diagram]: Process_diagram.png "Process diagram"
+
 
