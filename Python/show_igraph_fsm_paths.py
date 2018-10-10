@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from numpy import *
 from shapely.geometry import Polygon, Point
 from mpl_toolkits.basemap import Basemap
@@ -309,6 +310,64 @@ def show_igraph(fvert,fgmls,n_subgr,outfile,minsup,scale,labels,fontsize):
     att = plt.text(xt, yt, 'Gargano', fontsize=14,
                    fontweight='normal', ha='left', va='center', color='k',zorder=101, rotation=30)
     ax.add_artist(att)
+
+    ## Capitals
+    ## Rome 41°54′N 12°30′E
+    (xt, yt) = map(12.5, 41.9+0.02)
+    map.tissot(12.5,41.9,0.02,100,edgecolor='black',facecolor='black',linewidth=1,zorder=101)
+    att = plt.text(xt, yt, 'Rome', fontsize=12,
+                   fontweight='normal', ha='center', va='bottom', color='k',zorder=101)
+    ax.add_artist(att)
+    ## Zagreb 45°49′0″N 15°59′0″E
+    (xt, yt) = map(15.983, 45.817+0.02)
+    map.tissot(15.983, 45.817,0.02,100,edgecolor='black',facecolor='black',linewidth=1,zorder=101)
+    att = plt.text(xt, yt, 'Zagreb', fontsize=12,
+                   fontweight='normal', ha='center', va='bottom', color='k',zorder=101)
+    ax.add_artist(att)
+    ## Sarajevo 43°52′N 18°25′E
+    (xt, yt) = map(18.417, 43.867+0.02)
+    map.tissot(18.417, 43.867,0.02,100,edgecolor='black',facecolor='black',linewidth=1,zorder=101)
+    att = plt.text(xt, yt, 'Sarajevo', fontsize=12,
+                   fontweight='normal', ha='center', va='bottom', color='k',zorder=101)
+    ax.add_artist(att)
+    ## Podgorica 42°26′28.63″N 19°15′46.41″E
+    xcc = 19+15./60+46.41/3600
+    ycc = 42+26./60+28.63/3600
+    (xt, yt) = map(xcc, ycc+0.02)
+    map.tissot(xcc, ycc,0.02,100,edgecolor='black',facecolor='black',linewidth=1,zorder=101)
+    att = plt.text(xt, yt, 'Podgorica', fontsize=12,
+                   fontweight='normal', ha='center', va='bottom', color='k',zorder=101)
+    ax.add_artist(att)
+    ## Tirana 41°19′44″N 19°49′04″E
+    xcc = 19+49./60+4./3600
+    ycc = 41+19./60+44/3600
+    (xt, yt) = map(xcc, ycc+0.02)
+    map.tissot(xcc, ycc,0.02,100,edgecolor='black',facecolor='black',linewidth=1,zorder=101)
+    att = plt.text(xt, yt, 'Tirana', fontsize=12,
+                   fontweight='normal', ha='center', va='bottom', color='k',zorder=101)
+    ax.add_artist(att)
+
+    ## Sea names
+    ## Adriatic Sea
+    (xt, yt) = map(16.5, 42.0)
+    att = plt.text(xt, yt, 'Adriatic Sea', fontsize=14, bbox=dict(boxstyle="square", ec='black', fc='white'),
+                   fontweight='normal', ha='left', va='center', color='k',zorder=1100, rotation=-30)
+    ax.add_artist(att)
+    ## Tyrrhenian Sea
+    (xt, yt) = map(12.2, 41)
+    att = plt.text(xt, yt, 'Tyrrhenian Sea', fontsize=14, bbox=dict(boxstyle="square", ec='black', fc='white'),
+                   fontweight='normal', ha='left', va='center', color='k',zorder=101, rotation=0)
+    ax.add_artist(att)
+
+    ## map scale
+    map.drawmapscale(12.71, 40.3, lon0=0, lat0=0, length=100, barstyle='fancy', units='km', fontsize=9, yoffset=None,
+                     labelstyle='simple', fontcolor='k', fillcolor1='w', fillcolor2='k', ax=None, format='%d', zorder=None, linecolor=None, linewidth=None)
+
+    ## annotate projection
+    (xt, yt) = map(12.2, 39.8)
+    att = plt.text(xt, yt, 'Mercator Projection', fontsize=10, bbox=dict(boxstyle="square", ec='black', fc='white'),
+                   fontweight='normal', ha='left', va='center', color='k',zorder=101, rotation=0)
+    ax.add_artist(att)    
 
     fout.close()    
 

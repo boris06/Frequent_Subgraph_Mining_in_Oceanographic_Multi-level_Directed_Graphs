@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 from numpy import *
+import numpy as np
 from shapely.geometry import Polygon, Point
 from mpl_toolkits.basemap import Basemap
 import matplotlib.pyplot as plt
@@ -11,6 +13,7 @@ import matplotlib
 import glob
 import zipfile
 import os
+import math
 
 
 def read_areas_def(vertfile):
@@ -60,6 +63,23 @@ def read_areas(vertfile):
             
     return (narea,area_name,area_lon_wmc,area_lat_wmc,area_poly,vcolor,vcol_loop)
 
+def draw_pie(ax,ratios=[0.4,0.3,0.3], X=0, Y=0, size = 1000, colors = ['red','blue','green','yellow','magenta','purple']):  
+ 
+    N = len(ratios)
+ 
+    xy = []
+ 
+    start = 0.
+    for ratio in ratios:
+        x = [0] + np.cos(np.linspace(2*math.pi*start,2*math.pi*(start+ratio), 30)).tolist()
+        y = [0] + np.sin(np.linspace(2*math.pi*start,2*math.pi*(start+ratio), 30)).tolist()
+        xy1 = zip(x,y)
+        xy.append(xy1)
+        start += ratio
+ 
+    for i, xyi in enumerate(xy):
+        ax.scatter([X],[Y] , marker=(xyi,0), s=size, facecolor=colors[i], zorder=600 )
+ 
 def show_igraph(fvert,fgmls,n_subgr,outfile,minsup,scale,labels,fontsize):
 
     (nx,ny,lons,lats) = read_areas_def(fvert)
@@ -174,6 +194,8 @@ def show_igraph(fvert,fgmls,n_subgr,outfile,minsup,scale,labels,fontsize):
                 lonm_next_epoch.append(lon_wmc[edges[i][1]])
                 latm_next_epoch.append(lat_wmc[edges[i][1]])
 
+            first = True
+
             for i in range(nrules):
                 if (is_loop[i]):
                     for j in range(narea):
@@ -210,6 +232,10 @@ def show_igraph(fvert,fgmls,n_subgr,outfile,minsup,scale,labels,fontsize):
                                     radius1 = radius * float(3 - ic) / 4
                             map.tissot(lonm_this_epoch[i],latm_this_epoch[i],radius1,100,
                                        edgecolor='black',facecolor=ec,linewidth=1, zorder=500)
+                            if (len(cols) > 1):
+                                pie_size = [1. / len(cols)] * len(cols)
+                                (xt, yt) = map(lonm_this_epoch[i], latm_this_epoch[i])
+                                draw_pie(ax,pie_size, xt, yt,size=775,colors=cols)
                             if (labels == 2):
                                 (xt, yt) = map(lonm_this_epoch[i], latm_this_epoch[i])
 ##                                plt.text(xt, yt, str(int(round(conf[i] * 100, 1))), fontsize=fontsize,
@@ -334,6 +360,66 @@ def show_igraph(fvert,fgmls,n_subgr,outfile,minsup,scale,labels,fontsize):
     att = plt.text(xt, yt, 'Gargano', fontsize=14,
                    fontweight='normal', ha='left', va='center', color='k',zorder=101, rotation=30)
     ax.add_artist(att)
+    
+    ## Capitals
+    ## Rome 41°54′N 12°30′E
+    (xt, yt) = map(12.5, 41.9+0.02)
+    map.tissot(12.5,41.9,0.02,100,edgecolor='black',facecolor='black',linewidth=1,zorder=101)
+    att = plt.text(xt, yt, 'Rome', fontsize=12,
+                   fontweight='normal', ha='center', va='bottom', color='k',zorder=101)
+    ax.add_artist(att)
+    ## Zagreb 45°49′0″N 15°59′0″E
+    (xt, yt) = map(15.983, 45.817+0.02)
+    map.tissot(15.983, 45.817,0.02,100,edgecolor='black',facecolor='black',linewidth=1,zorder=101)
+    att = plt.text(xt, yt, 'Zagreb', fontsize=12,
+                   fontweight='normal', ha='center', va='bottom', color='k',zorder=101)
+    ax.add_artist(att)
+    ## Sarajevo 43°52′N 18°25′E
+    (xt, yt) = map(18.417, 43.867+0.02)
+    map.tissot(18.417, 43.867,0.02,100,edgecolor='black',facecolor='black',linewidth=1,zorder=101)
+    att = plt.text(xt, yt, 'Sarajevo', fontsize=12,
+                   fontweight='normal', ha='center', va='bottom', color='k',zorder=101)
+    ax.add_artist(att)
+    ## Podgorica 42°26′28.63″N 19°15′46.41″E
+    xcc = 19+15./60+46.41/3600
+    ycc = 42+26./60+28.63/3600
+    (xt, yt) = map(xcc, ycc+0.02)
+    map.tissot(xcc, ycc,0.02,100,edgecolor='black',facecolor='black',linewidth=1,zorder=101)
+    att = plt.text(xt, yt, 'Podgorica', fontsize=12,
+                   fontweight='normal', ha='center', va='bottom', color='k',zorder=101)
+    ax.add_artist(att)
+    ## Tirana 41°19′44″N 19°49′04″E
+    xcc = 19+49./60+4./3600
+    ycc = 41+19./60+44/3600
+    (xt, yt) = map(xcc, ycc+0.02)
+    map.tissot(xcc, ycc,0.02,100,edgecolor='black',facecolor='black',linewidth=1,zorder=101)
+    att = plt.text(xt, yt, 'Tirana', fontsize=12,
+                   fontweight='normal', ha='center', va='bottom', color='k',zorder=101)
+    ax.add_artist(att)
+
+    ## Sea names
+    ## Adriatic Sea
+    (xt, yt) = map(16, 42.3)
+    att = plt.text(xt, yt, 'Adriatic Sea', fontsize=14, bbox=dict(boxstyle="square", ec='black', fc='white'),
+                   fontweight='normal', ha='left', va='center', color='k',zorder=1100, rotation=-30)
+    ax.add_artist(att)
+    ## Tyrrhenian Sea
+    (xt, yt) = map(12.2, 41)
+    att = plt.text(xt, yt, 'Tyrrhenian Sea', fontsize=14, bbox=dict(boxstyle="square", ec='black', fc='white'),
+                   fontweight='normal', ha='left', va='center', color='k',zorder=101, rotation=0)
+    ax.add_artist(att)
+
+    ## map scale
+    map.drawmapscale(12.71, 40.3, lon0=0, lat0=0, length=100, barstyle='fancy', units='km', fontsize=9, yoffset=None,
+                     labelstyle='simple', fontcolor='k', fillcolor1='w', fillcolor2='k', ax=None, format='%d', zorder=None, linecolor=None, linewidth=None)
+
+    ## annotate projection
+    (xt, yt) = map(12.2, 39.8)
+    att = plt.text(xt, yt, 'Mercator Projection', fontsize=10, bbox=dict(boxstyle="square", ec='black', fc='white'),
+                   fontweight='normal', ha='left', va='center', color='k',zorder=101, rotation=0)
+    ax.add_artist(att)
+
+    ## 8-subgraphs - red circles and labels fo convergences / divergences
 
     fout.close()    
 
@@ -345,7 +431,7 @@ files = glob.glob('..\\data\\temp1\\*')
 for f in files:
     os.remove(f)
 ## enter desired n_subgr
-n_subgr = 8
+n_subgr = 5
 zipfile1 = zipfile.ZipFile("..\\data\\subgraphs\\%d-subgraph-adriatic-26.zip" % n_subgr,"r")
 zipfile1.extractall('..\\data\\temp1\\')
 fgmls = glob.glob("..\\data\\temp1\\graph*.gml")
@@ -354,7 +440,7 @@ print outfile
 
 matplotlib.rcParams.update({'font.size': 24})
 
-## enter desired minsup
+## enter desired minsup (minsup=52 for 1-subgraphs, 26 otherwise)
 minsup = 26
 
 show_igraph(fvert,fgmls,n_subgr,outfile,minsup,3000,1,12)
