@@ -318,7 +318,8 @@ def show_igraph(fvert,fgmls,n_subgr,outfile,minsup,scale,labels,fontsize,type):
     xtiss = LXPosStart + radius
     ytiss = LYPosTextStart + LYStepFactor * 4
     (xt, yt) = map(xtiss, ytiss)
-    map.tissot(xtiss,ytiss,radius,100,edgecolor='black',facecolor='blue',linewidth=3,zorder=100)
+    # map.tissot(xtiss,ytiss,radius,100,edgecolor='black',facecolor='blue',linewidth=3,zorder=100)
+    map.scatter(xt,yt, 100, color="b", marker="s", edgecolor="k", linewidth=1, zorder=100)
     xtext = xtiss + 3 * radius
     ytext = ytiss
     (xt, yt) = map(xtext, ytext)
@@ -329,7 +330,8 @@ def show_igraph(fvert,fgmls,n_subgr,outfile,minsup,scale,labels,fontsize,type):
     xtiss = LXPosCircleStart + radius 
     ytiss = LYPosTextStart + LYStepFactor * 4
     (xt, yt) = map(xtiss, ytiss)
-    map.tissot(xtiss,ytiss,radius,100,edgecolor='black',facecolor='green',linewidth=3,zorder=100)
+    # map.tissot(xtiss,ytiss,radius,100,edgecolor='black',facecolor='green',linewidth=3,zorder=100)
+    map.scatter(xt,yt, 100, color="g", marker="s", edgecolor="k", linewidth=1, zorder=100)
     xtext = xtiss + 3 * radius
     ytext = ytiss
     (xt, yt) = map(xtext, ytext)
@@ -340,7 +342,8 @@ def show_igraph(fvert,fgmls,n_subgr,outfile,minsup,scale,labels,fontsize,type):
     xtiss = LXPosStart + radius
     ytiss = LYPosTextStart + LYStepFactor * 5
     (xt, yt) = map(xtiss, ytiss)
-    map.tissot(xtiss,ytiss,radius,100,edgecolor='black',facecolor='red',linewidth=3,zorder=100)
+    # map.tissot(xtiss,ytiss,radius,100,edgecolor='black',facecolor='red',linewidth=3,zorder=100)
+    map.scatter(xt,yt, 100, color="r", marker="s", edgecolor="k", linewidth=1, zorder=100)
     xtext = xtiss + 3 * radius
     ytext = ytiss
     (xt, yt) = map(xtext, ytext)
@@ -351,7 +354,8 @@ def show_igraph(fvert,fgmls,n_subgr,outfile,minsup,scale,labels,fontsize,type):
     xtiss = LXPosCircleStart + radius
     ytiss = LYPosTextStart + LYStepFactor * 5
     (xt, yt) = map(xtiss, ytiss)
-    map.tissot(xtiss,ytiss,radius,100,edgecolor='black',facecolor='burlywood',linewidth=3,zorder=100)
+    # map.tissot(xtiss,ytiss,radius,100,edgecolor='black',facecolor='burlywood',linewidth=3,zorder=100)
+    map.scatter(xt,yt, 100, color="burlywood", marker="s", edgecolor="k", linewidth=1, zorder=100)
     xtext = xtiss + 3 * radius
     ytext = ytiss
     (xt, yt) = map(xtext, ytext)

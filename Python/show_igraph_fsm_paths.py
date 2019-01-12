@@ -104,6 +104,9 @@ def show_igraph(fvert,fgmls,n_subgr,outfile,minsup,scale,labels,fontsize):
     fout = open(outfile, 'w')    
 
     gcnt = 0
+
+    season_1 = []
+
     for fgml in fgmls:
 
         g = Graph.Read_GraphML(fgml)
@@ -211,12 +214,26 @@ def show_igraph(fvert,fgmls,n_subgr,outfile,minsup,scale,labels,fontsize):
                                          fontweight='normal', ha='center', va='center', color=red)
                             break
 
+            
+            # season_1.append(season)
+            print season
+
             for i in range(nrules):
                 if (not(is_loop[i])):
+                    season_color = 'black'
+                    if season == 'winter':
+                        season_color = 'blue'
+                    elif season == 'spring':
+                        season_color = 'green'
+                    elif season == 'summer':
+                        season_color = 'red'
+                    elif season == 'autumn':
+                        season_color = 'burlywood'
+
                     (xbm, ybm) = map(lonm_this_epoch[i], latm_this_epoch[i])
                     (xm, ym) = map(lonm_next_epoch[i], latm_next_epoch[i])
                     arr = ptch.FancyArrow(xbm,ybm,xm-xbm,ym-ybm,width=scale*conf[i],shape='full',
-                                          length_includes_head=True,facecolor=colr, edgecolor='black', zorder=1000)
+                                          length_includes_head=True,facecolor=season_color, edgecolor='black', zorder=1000)
                     ax = plt.gca()
                     ax.add_patch(arr)
                     if (labels == 2):
@@ -267,6 +284,8 @@ def show_igraph(fvert,fgmls,n_subgr,outfile,minsup,scale,labels,fontsize):
 
     #radii = radii / countr
 
+    #radii = radii / countr
+
     for confl in range(3):
         xpos1 = LXPosStart
         ypos1 = LYPosStart + confl * LYStepFactor
@@ -277,13 +296,6 @@ def show_igraph(fvert,fgmls,n_subgr,outfile,minsup,scale,labels,fontsize):
         arr = ptch.FancyArrow(xbm, ybm, xm - xbm, ym - ybm, width=scale * (confl+1),
                               length_includes_head=True, facecolor='k', edgecolor='black',zorder=100)
         ax.add_patch(arr)
-##        xpos3 = LXPosCircleStart
-##        ypos3 = LYPosCircleStart + confl * LYStepFactor
-##        #radius = radii * ((confl + 1.) / 3.)
-##        radius = radii * float(confl+1) / 4
-##        map.tissot(xpos3,ypos3,radius,100,edgecolor='black',facecolor='b',linewidth=3,zorder=100)
-##        xtext = LXPosTextStart
-##        ytext = LYPosTextStart + confl * LYStepFactor
         xtext = LXPosCircleStart
         ytext = LYPosCircleStart + confl * LYStepFactor
         (xt, yt) = map(xtext, ytext)
@@ -291,7 +303,7 @@ def show_igraph(fvert,fgmls,n_subgr,outfile,minsup,scale,labels,fontsize):
                        fontweight='normal', ha='left', va='center', color='k',zorder=100)
         ax.add_artist(att)
 
-    lats = [ ypos1 + LYStepFactor, ypos1 + LYStepFactor, LYPosStart - LYStepFactor, LYPosStart - LYStepFactor]
+    lats = [ ypos1 + LYStepFactor*4, ypos1 + LYStepFactor*4, LYPosStart - LYStepFactor, LYPosStart - LYStepFactor]
     lons = [ LXPosStart + LYStepFactor, LXPosTextStart - LYStepFactor*3, LXPosTextStart - LYStepFactor*3, LXPosStart + LYStepFactor ]
     x, y = map(lons,lats)
     xy = zip(x,y)
@@ -302,6 +314,63 @@ def show_igraph(fvert,fgmls,n_subgr,outfile,minsup,scale,labels,fontsize):
     ytext = LYPosTextStart - LYStepFactor * 0.6
     (xt, yt) = map(xtext, ytext)
     att = plt.text(xt, yt, 'Probability of transition:', fontsize=14,
+                   fontweight='normal', ha='left', va='center', color='k',zorder=101)
+    ax.add_artist(att)
+    
+    xtext = LXPosStart
+    ytext = LYPosTextStart + LYStepFactor * 3
+    (xt, yt) = map(xtext, ytext)
+    att = plt.text(xt, yt, 'Seasons:', fontsize=14,
+                   fontweight='normal', ha='left', va='center', color='k',zorder=101)
+    ax.add_artist(att)
+
+    radius = 0.075
+
+    xtiss = LXPosStart + radius
+    ytiss = LYPosTextStart + LYStepFactor * 4
+    (xt, yt) = map(xtiss, ytiss)
+    # map.tissot(xtiss,ytiss,radius,100,edgecolor='black',facecolor='blue',linewidth=3,zorder=100)
+    map.scatter(xt,yt, 100, color="b", marker="s", edgecolor="k", linewidth=1, zorder=100)
+    xtext = xtiss + 3 * radius
+    ytext = ytiss
+    (xt, yt) = map(xtext, ytext)
+    att = plt.text(xt, yt, 'winter', fontsize=14,
+                   fontweight='normal', ha='left', va='center', color='k',zorder=101)
+    ax.add_artist(att)
+   
+    xtiss = LXPosCircleStart + radius 
+    ytiss = LYPosTextStart + LYStepFactor * 4
+    (xt, yt) = map(xtiss, ytiss)
+    # map.tissot(xtiss,ytiss,radius,100,edgecolor='black',facecolor='green',linewidth=3,zorder=100)
+    map.scatter(xt,yt, 100, color="g", marker="s", edgecolor="k", linewidth=1, zorder=100)
+    xtext = xtiss + 3 * radius
+    ytext = ytiss
+    (xt, yt) = map(xtext, ytext)
+    att = plt.text(xt, yt, 'spring', fontsize=14,
+                   fontweight='normal', ha='left', va='center', color='k',zorder=101)
+    ax.add_artist(att)
+    
+    xtiss = LXPosStart + radius
+    ytiss = LYPosTextStart + LYStepFactor * 5
+    (xt, yt) = map(xtiss, ytiss)
+    # map.tissot(xtiss,ytiss,radius,100,edgecolor='black',facecolor='red',linewidth=3,zorder=100)
+    map.scatter(xt,yt, 100, color="r", marker="s", edgecolor="k", linewidth=1, zorder=100)
+    xtext = xtiss + 3 * radius
+    ytext = ytiss
+    (xt, yt) = map(xtext, ytext)
+    att = plt.text(xt, yt, 'summer', fontsize=14,
+                   fontweight='normal', ha='left', va='center', color='k',zorder=101)
+    ax.add_artist(att)
+
+    xtiss = LXPosCircleStart + radius
+    ytiss = LYPosTextStart + LYStepFactor * 5
+    (xt, yt) = map(xtiss, ytiss)
+    # map.tissot(xtiss,ytiss,radius,100,edgecolor='black',facecolor='burlywood',linewidth=3,zorder=100)
+    map.scatter(xt,yt, 100, color="burlywood", marker="s", edgecolor="k", linewidth=1, zorder=100)
+    xtext = xtiss + 3 * radius
+    ytext = ytiss
+    (xt, yt) = map(xtext, ytext)
+    att = plt.text(xt, yt, 'autumn', fontsize=14,
                    fontweight='normal', ha='left', va='center', color='k',zorder=101)
     ax.add_artist(att)
 
@@ -325,10 +394,10 @@ def show_igraph(fvert,fgmls,n_subgr,outfile,minsup,scale,labels,fontsize):
                    fontweight='normal', ha='center', va='bottom', color='k',zorder=101)
     ax.add_artist(att)
     ## Sarajevo 43°52′N 18°25′E
-    (xt, yt) = map(18.417, 43.867+0.02)
-    map.tissot(18.417, 43.867,0.02,100,edgecolor='black',facecolor='black',linewidth=1,zorder=101)
-    att = plt.text(xt, yt, 'Sarajevo', fontsize=12,
-                   fontweight='normal', ha='center', va='bottom', color='k',zorder=101)
+##    (xt, yt) = map(18.417, 43.867+0.02)
+##    map.tissot(18.417, 43.867,0.02,100,edgecolor='black',facecolor='black',linewidth=1,zorder=101)
+##    att = plt.text(xt, yt, 'Sarajevo', fontsize=12,
+##                   fontweight='normal', ha='center', va='bottom', color='k',zorder=101)
     ax.add_artist(att)
     ## Podgorica 42°26′28.63″N 19°15′46.41″E
     xcc = 19+15./60+46.41/3600

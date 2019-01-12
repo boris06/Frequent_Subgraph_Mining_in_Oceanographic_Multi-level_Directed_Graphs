@@ -78,7 +78,7 @@ def draw_pie(ax,ratios=[0.4,0.3,0.3], X=0, Y=0, size = 1000, colors = ['red','bl
         start += ratio
  
     for i, xyi in enumerate(xy):
-        ax.scatter([X],[Y] , marker=(xyi,0), s=size, facecolor=colors[i], zorder=600 )
+        ax.scatter([X],[Y] , marker=(xyi,0), s=size, facecolor=colors[i], zorder=600, linewidths=1, edgecolors='k' )
  
 def show_igraph(fvert,fgmls,n_subgr,outfile,minsup,scale,labels,fontsize):
 
@@ -218,8 +218,9 @@ def show_igraph(fvert,fgmls,n_subgr,outfile,minsup,scale,labels,fontsize):
                             if (conf[i] == 3):
                                 radii = radii + radius
                                 countr = countr + 1
-                            if (n_subgr == 1):
-                                ec = 'r'
+                            if (n_subgr == 1 or n_subgr == 8):
+                                # ec = 'r'
+                                ec = 'g'
                             else:
                                 ec = colr
                             cols = unique(vcol_loop[j])
@@ -249,7 +250,7 @@ def show_igraph(fvert,fgmls,n_subgr,outfile,minsup,scale,labels,fontsize):
                 if (not(is_loop[i])) and area_next_epoch[i] != 'A472':
                     (xbm, ybm) = map(lonm_this_epoch[i], latm_this_epoch[i])
                     (xm, ym) = map(lonm_next_epoch[i], latm_next_epoch[i])
-                    if (n_subgr == 1):
+                    if (n_subgr == 1 or n_subgr == 8):
                         ec = 'g'
                     else:
                         ec = colr
@@ -318,7 +319,7 @@ def show_igraph(fvert,fgmls,n_subgr,outfile,minsup,scale,labels,fontsize):
         ypos2 = ypos1
         (xbm, ybm) = map(xpos1, ypos1)
         (xm, ym) = map(xpos2, ypos2)
-        if (n_subgr == 1):
+        if (n_subgr == 1 or n_subgr == 8):
             arr = ptch.FancyArrow(xbm, ybm, xm - xbm, ym - ybm, width=scale * (confl+1),
                                   length_includes_head=True, facecolor='g', edgecolor='black',zorder=100)
         else:
@@ -329,8 +330,8 @@ def show_igraph(fvert,fgmls,n_subgr,outfile,minsup,scale,labels,fontsize):
         ypos3 = LYPosCircleStart + confl * LYStepFactor
         radius = radii * ((confl + 1.) / 3.)
         #radius = radii * float(confl+1) / 4
-        if (n_subgr == 1):
-            map.tissot(xpos3,ypos3,radius,100,edgecolor='black',facecolor='r',linewidth=1,zorder=100)
+        if (n_subgr == 1 or n_subgr == 8):
+            map.tissot(xpos3,ypos3,radius,100,edgecolor='black',facecolor='g',linewidth=1,zorder=100)
         else:
             map.tissot(xpos3,ypos3,radius,100,edgecolor='black',facecolor='b',linewidth=1,zorder=100)
  
@@ -431,7 +432,7 @@ files = glob.glob('..\\data\\temp1\\*')
 for f in files:
     os.remove(f)
 ## enter desired n_subgr
-n_subgr = 5
+n_subgr = 8
 zipfile1 = zipfile.ZipFile("..\\data\\subgraphs\\%d-subgraph-adriatic-26.zip" % n_subgr,"r")
 zipfile1.extractall('..\\data\\temp1\\')
 fgmls = glob.glob("..\\data\\temp1\\graph*.gml")

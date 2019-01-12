@@ -139,7 +139,7 @@ for (ig in seq(length(graphList))) {
 supportSorted <- sort.int(supportList, decreasing = TRUE, index.return = TRUE)
 
 minedges <- n_edges
-maxedges <- 10
+maxedges <- n_edges
 gMaxCount <- 1000
 gCount <- 0
 gCount_d <- 0
